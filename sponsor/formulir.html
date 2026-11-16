@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pendaftaran Sponsor</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-neu: #e6ebf4;
+            --shadow-light: #ffffff;
+            --shadow-dark: #c4ccda;
+            --text-primary: #2d3748;
+            --text-secondary: #64748b;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --radius: 20px;
+            
+            --neu-flat: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            --neu-pressed: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+            --neu-sm: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-neu);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* Header Form */
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Main Form Card */
+        .sponsor-form {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-flat);
+            border-radius: var(--radius);
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-group label i {
+            color: var(--accent-color);
+            margin-right: 6px;
+        }
+
+        .form-control, .form-select {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-neu);
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--neu-pressed);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light), 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* File Upload Custom Style */
+        .file-upload-box {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-pressed);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .file-upload-box input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-box i {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .file-upload-box p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Payment Info Box */
+        .payment-info {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-pressed);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .payment-info .dana-details h4 {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .payment-info .dana-details p {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 800;
+        }
+
+        .dana-logo {
+            font-weight: 800;
+            color: #0080ff;
+            font-size: 1.2rem;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-sm);
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            background: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 6px 6px 14px rgba(79, 70, 229, 0.35), -6px -6px 14px var(--shadow-light);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-submit:active {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 480px) {
+            .sponsor-form {
+                padding: 24px 16px;
+            }
+            .payment-info {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-header">
+            <h1>Formulir Sponsor & Media Kit</h1>
+            <p>Isi data brand Anda dan lanjutkan pembayaran secara instan via DANA.</p>
+        </div>
+
+        <form class="sponsor-form" id="sponsorForm" onsubmit="handleSponsorSubmit(event)">
+            
+            <!-- Nama Brand -->
+            <div class="form-group">
+                <label for="brandName"><i class="fa-solid fa-tag"></i> Nama Brand / Perusahaan</label>
+                <input type="text" id="brandName" class="form-control" placeholder="Contoh: TechCorp Indonesia" required>
+            </div>
+
+            <!-- Pilih Paket -->
+            <div class="form-group">
+                <label for="packageSelect"><i class="fa-solid fa-box"></i> Pilih Paket Sponsor</label>
+                <select id="packageSelect" class="form-select" required>
+                    <option value="" disabled selected>-- Pilih Paket --</option>
+                    <option value="Supporter / Banner - Rp 150.000">Supporter / Banner (Rp 150.000 /bulan)</option>
+                    <option value="Featured Partner - Rp 450.000">Featured Partner (Rp 450.000 /bulan)</option>
+                    <option value="Custom Partnership">Custom Partnership (Sesuai Kesepakatan)</option>
+                </select>
+            </div>
+
+            <!-- Upload Logo / Banner -->
+            <div class="form-group">
+                <label><i class="fa-solid fa-image"></i> Upload Logo / Banner Brand</label>
+                <div class="file-upload-box">
+                    <input type="file" id="logoFile" accept="image/*">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <p id="fileNameDisplay">Seret file ke sini atau klik untuk memilih (PNG/JPG)</p>
+                </div>
+            </div>
+
+            <!-- Deskripsi Sponsor -->
+            <div class="form-group">
+                <label for="description"><i class="fa-solid fa-pen-nib"></i> Deskripsi Singkat Brand / Produk</label>
+                <textarea id="description" class="form-control" placeholder="Jelaskan secara singkat produk atau layanan brand Anda..."></textarea>
+            </div>
+
+            <!-- Alamat -->
+            <div class="form-group">
+                <label for="address"><i class="fa-solid fa-location-dot"></i> Alamat Perusahaan / Domisili</label>
+                <input type="text" id="address" class="form-control" placeholder="Kota / Alamat lengkap kantor">
+            </div>
+
+            <!-- No HP / WhatsApp -->
+            <div class="form-group">
+                <label for="phone"><i class="fa-solid fa-phone"></i> No HP / WhatsApp (Aktif)</label>
+                <input type="tel" id="phone" class="form-control" placeholder="Contoh: 081234567890" required>
+            </div>
+
+            <!-- Info Pembayaran DANA Admin -->
+            <div class="payment-info">
+                <div class="dana-details">
+                    <h4>Transfer Pembayaran Tujuan:</h4>
+                    <p>No.(a.n. Admin AWDev)</p>
+                </div>
+                <div class="dana-logo">DANA</div>
+            </div>
+
+            <!-- Tombol Kirim & Pay -->
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-paper-plane"></i> Kirim Data & Bayar via DANA
+            </button>
+        </form>
+
+        <a href="https://awdev.my.id" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+    </div>
+
+    <script>
+        // Menampilkan nama file yang di-upload
+        const fileInput = document.getElementById('logoFile');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = "File dipilih: " + fileInput.files[0].name;
+            }
+        });
+
+        // Fungsi saat tombol Submit diklik
+        function handleSponsorSubmit(event) {
+            event.preventDefault(); // Mencegah form reload default
+
+            // Ambil nilai dari input form
+            const brandName = document.getElementById('brandName').value;
+            const packageSelect = document.getElementById('packageSelect').value;
+            const description = document.getElementById('description').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+
+            // Ganti email di bawah dengan email admin Anda yang sebenarnya
+            const adminEmail = "cs@awdev.my.id"; 
+            const subject = encodeURIComponent(`Pendaftaran Sponsor Baru - ${brandName}`);
+            
+            // Format isi email otomatis
+            const body = encodeURIComponent(
+                `Halo Admin ,\n\n` +
+                `Berikut adalah data pendaftaran sponsor baru:\n\n` +
+                `• Nama Brand: ${brandName}\n` +
+                `• Paket Dipilih: ${packageSelect}\n` +
+                `• No. HP / WhatsApp: ${phone}\n` +
+                `• Alamat: ${address}\n` +
+                `• Deskripsi:\n${description}\n\n` +
+                `*(Catatan: File logo/banner di-upload langsung dari perangkat lokal pengguna).*`
+            );
+
+            // 1. Membuka aplikasi email client untuk mengirim data ke admin
+            window.location.href = `mailto:${adminEmail}?subject=${subject}&body=${body}`;
+
+            // 2. Mengarahkan langsung ke pembayaran DANA (bisa diganti link deeplink DANA atau nomor tujuan)
+            // Ganti link di bawah dengan nomor DANA tujuan atau link pembayaran (misal: https://link.dana.id/...)
+            setTimeout(() => {
+                alert("Data formulir telah disiapkan untuk dikirim via email. Anda akan diarahkan ke halaman/aplikasi pembayaran DANA.");
+                // Contoh pengalihan link DANA (sesuaikan nomor atau URL pembayaran Anda)
+                window.location.href = "https://m.dana.id/s/catalogue/qn3axzk8"; 
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
