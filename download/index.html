@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fastsong - All-in-One Media Downloader & Advanced Converter</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9308517202792186"
+    crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-9308517202792186">
+    <script async custom-element="amp-auto-ads"
+    src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+    
+    
+    <meta name="description" content="FASTSONG adalah editor musik online gratis untuk memotong, mengedit, dan meningkatkan kualitas audio langsung dari browser tanpa instalasi." />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://fastsong.eu.org/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://fastsong.eu.org/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://fastsong.eu.org/apple-touch-icon.png">
+    <style>
+        :root {
+            --bg-color: #e0e5ec;
+            --text-main: #4a5568;
+            --text-muted: #a0aec0;
+            --shadow-light: #ffffff;
+            --shadow-dark: #a3b1c6;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --accent: #06b6d4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding-top: 80px; /* Spacer untuk fixed navbar */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Neumorphic Effects */
+        .neu-flat {
+            background: var(--bg-color);
+            box-shadow: 9px 9px 16px var(--shadow-dark), 
+                       -9px -9px 16px var(--shadow-light);
+            border-radius: 20px;
+        }
+
+        .neu-pressed {
+            background: var(--bg-color);
+            box-shadow: inset 6px 6px 10px var(--shadow-dark), 
+                        inset -6px -6px 10px var(--shadow-light);
+            border-radius: 15px;
+        }
+
+        .neu-button {
+            background: var(--bg-color);
+            box-shadow: 6px 6px 12px var(--shadow-dark), 
+                       -6px -6px 12px var(--shadow-light);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .neu-button:active, .neu-button.active {
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), 
+                        inset -4px -4px 8px var(--shadow-light);
+            color: var(--primary);
+        }
+
+        /* --- NAVBAR & DROPDOWN --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--bg-color);
+            box-shadow: 0 4px 15px rgba(163, 177, 198, 0.4);
+            z-index: 1000;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-color);
+            min-width: 180px;
+            box-shadow: 8px 8px 16px var(--shadow-dark), 
+                       -8px -8px 16px var(--shadow-light);
+            border-radius: 12px;
+            padding: 10px 0;
+            z-index: 10;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* --- HERO HEADER --- */
+        header {
+            text-align: center;
+            padding: 20px 0 30px 0;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- MAIN CONVERTER --- */
+        .converter-card {
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: none;
+            outline: none;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            background: var(--bg-color);
+            border-radius: 15px;
+            box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                        inset -5px -5px 10px var(--shadow-light);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for mobile */
+        }
+
+        .option-section h3 {
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .chips-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .chip {
+            padding: 8px 14px;
+            font-size: 0.8rem;
+            border-radius: 10px;
+            background: var(--bg-color);
+            box-shadow: 4px 4px 8px var(--shadow-dark), 
+                       -4px -4px 8px var(--shadow-light);
+            cursor: pointer;
+            user-select: none;
+            transition: 0.2s;
+        }
+
+        .chip.selected {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                        inset -3px -3px 6px var(--shadow-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            background: var(--primary);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), 
+                       -6px -6px 12px var(--shadow-light);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover { background: var(--primary-hover); }
+
+        /* --- PLATFORMS BAR --- */
+        .platforms-bar {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .platforms-bar span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* --- TRENDING SLIDER --- */
+        .trending-section {
+            margin-bottom: 30px;
+        }
+
+        .trending-section h2, .section-title {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-slider {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .category-slider::-webkit-scrollbar { display: none; }
+
+        .cat-item {
+            flex: 0 0 auto;
+            padding: 12px 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 12px;
+            cursor: pointer;
+            background: var(--bg-color);
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                       -5px -5px 10px var(--shadow-light);
+            transition: 0.2s;
+        }
+
+        .cat-item:hover, .cat-item.active {
+            color: var(--primary);
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                        inset -3px -3px 6px var(--shadow-light);
+        }
+
+        /* --- RESULT CARD --- */
+        .result-card {
+            padding: 25px;
+            display: none;
+            margin-bottom: 30px;
+        }
+
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .result-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            background: #cbd5e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                        inset -3px -3px 6px var(--shadow-light);
+            flex-shrink: 0;
+        }
+
+        .result-meta h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .result-meta p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            flex: 1;
+            min-width: 130px;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: var(--bg-color);
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                       -5px -5px 10px var(--shadow-light);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .action-btn:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), 
+                        inset -3px -3px 6px var(--shadow-light);
+            color: var(--primary);
+        }
+
+        .action-btn.primary { color: var(--primary); font-weight: 600; }
+
+        /* --- MEDIA SHARE SECTION --- */
+        .share-section {
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            box-shadow: 5px 5px 10px var(--shadow-dark), 
+                       -5px -5px 10px var(--shadow-light);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .share-btn:hover { color: var(--primary); }
+
+        /* --- TUTORIAL ARTICLES (ENGLISH) --- */
+        .articles-section {
+            margin-bottom: 40px;
+        }
+
+        .article-card {
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .article-card h3 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .article-card p {
+            font-size: 0.85srem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* --- CONTACT FORM --- */
+        .contact-section {
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 18px;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            background: var(--bg-color);
+            border-radius: 12px;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), 
+                        inset -4px -4px 8px var(--shadow-light);
+            color: var(--text-main);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-color);
+            box-shadow: inset 0 8px 12px rgba(163, 177, 198, 0.3);
+            padding: 40px 20px 20px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .footer-col ul li a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(160, 174, 192, 0.3);
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="nav-brand"><i class="fa-solid fa-cloud-arrow-down"></i> fastsong</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Tools <i class="fa-solid fa-angle-down" style="font-size: 0.7rem;"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">Video Downloader</a>
+                    <a href="#">Audio Extractor</a>
+                    <a href="#">Converter Pro</a>
+                    <a href="#">Batch Downloader</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Platforms <i class="fa-solid fa-angle-down" style="font-size: 0.7rem;"></i></a>
+                <div class="dropdown-content">
+                    <a href="#">TikTok</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Spotify</a>
+                </div>
+            </li>
+            <li><a href="#tutorials">Tutorials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header>
+            <h1>Fastsong Downloader</h1>
+            <p>All-in-One Media Downloader & Advanced Converter</p>
+        </header>
+
+        <!-- Main Converter Box -->
+        <div class="converter-card neu-flat">
+            <div class="input-group">
+                <i class="fa-solid fa-link"></i>
+                <input type="text" id="mediaUrl" placeholder="Paste TikTok, YouTube, IG, FB, Spotify link here...">
+            </div>
+
+            <div class="options-grid">
+                <!-- Format Selection -->
+                <div class="option-section">
+                    <h3>Format Output</h3>
+                    <div class="chips-container" id="formatChips">
+                        <div class="chip selected" data-value="mp4">MP4 (Video)</div>
+                        <div class="chip" data-value="mp3">MP3 (Audio)</div>
+                        <div class="chip" data-value="webm">WEBM (High Res)</div>
+                        <div class="chip" data-value="wav">WAV (Lossless)</div>
+                    </div>
+                </div>
+
+                <!-- Quality Selection -->
+                <div class="option-section">
+                    <h3>Kualitas</h3>
+                    <div class="chips-container" id="qualityChips">
+                        <div class="chip selected" data-value="hd">Highest HD</div>
+                        <div class="chip" data-value="balanced">Balanced (Standard)</div>
+                        <div class="chip" data-value="saver">Data Saver</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-submit" id="processBtn">Proses & Unduh Sekarang</button>
+        </div>
+
+        <!-- Supported Platforms Bar -->
+        <div class="platforms-bar neu-flat">
+            <span><i class="fa-brands fa-tiktok"></i> TikTok</span>
+            <span><i class="fa-brands fa-youtube"></i> YouTube</span>
+            <span><i class="fa-brands fa-instagram"></i> Instagram</span>
+            <span><i class="fa-brands fa-facebook"></i> Facebook</span>
+            <span><i class="fa-brands fa-twitter"></i> Twitter/X</span>
+            <span><i class="fa-brands fa-spotify"></i> Spotify</span>
+            <span><i class="fa-brands fa-soundcloud"></i> SoundCloud</span>
+            <span><i class="fa-brands fa-apple"></i> Apple Music</span>
+        </div>
+
+        <!-- Trending Categories Slider -->
+        <div class="trending-section">
+            <h2><i class="fa-solid fa-fire" style="color: #ef4444;"></i> Trending Categories & Media</h2>
+            <div class="category-slider">
+                <div class="cat-item active" onclick="setQuickSearch('Top Indonesia')">Top Indonesia</div>
+                <div class="cat-item" onclick="setQuickSearch('Global Hits')">Global Hits</div>
+                <div class="cat-item" onclick="setQuickSearch('Viral TikTok')">Viral TikTok</div>
+                <div class="cat-item" onclick="setQuickSearch('Remix Festival')">Remix Festival</div>
+                <div class="cat-item" onclick="setQuickSearch('Pop Anthems')">Pop Anthems</div>
+                <div class="cat-item" onclick="setQuickSearch('LoFi Beats')">LoFi Beats</div>
+            </div>
+        </div>
+
+        <!-- Search & Conversion Results Box -->
+        <div class="result-card neu-flat" id="resultCard">
+            <div class="result-header">
+                <div class="result-thumb" id="resultThumb">
+                    <i class="fa-solid fa-music"></i>
+                </div>
+                <div class="result-meta">
+                    <h4 id="resultTitle">Judul Media Akan Tampil di Sini</h4>
+                    <p id="resultInfo">Format: MP4 • Ukuran: ~14.2 MB • Durasi: 03:45</p>
+                </div>
+            </div>
+            <div class="result-actions">
+                <button class="action-btn primary" id="btnDownloadInstant">
+                    <i class="fa-solid fa-download"></i> Instant Download
+                </button>
+                <button class="action-btn" id="btnPreview">
+                    <i class="fa-solid fa-play"></i> One-Click Play
+                </button>
+            </div>
+        </div>
+
+        <!-- Media Share Section -->
+        <div class="share-section neu-flat">
+            <h3 style="font-size: 1rem; margin-bottom: 5px;">Share fastsong with Friends</h3>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Help others discover fast media downloading</p>
+            <div class="share-buttons">
+                <a href="#" class="share-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="share-btn"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="share-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#" class="share-btn"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="share-btn"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- English Tutorial Articles Section -->
+        <div class="articles-section" id="tutorials">
+            <h2 class="section-title"><i class="fa-solid fa-book-open" style="color: var(--primary);"></i> Guides & Tutorials</h2>
+            
+            <div class="article-card neu-flat">
+                <h3>How to Download High-Resolution Videos from YouTube</h3>
+                <p>Learn the step-by-step process of extracting 1080p and 4K videos safely using fastsong Converter. Paste your link, choose your target format, and click download in seconds.</p>
+            </div>
+
+            <div class="article-card neu-flat">
+                <h3>Converting Spotify Playlists to Lossless WAV Audio</h3>
+                <p>Discover how to transform your favorite streaming music tracks into high-fidelity WAV or standard MP3 formats for offline listening across all your personal devices.</p>
+            </div>
+        </div>
+
+        <!-- Contact Form Section -->
+        <div class="contact-section neu-flat" id="contact">
+            <h2 class="section-title" style="margin-bottom: 20px;"><i class="fa-solid fa-headset" style="color: var(--primary);"></i> Contact Support</h2>
+            <form id="contactForm" onsubmit="event.preventDefault(); alert('Message sent successfully! We will get back to you soon.');">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email Address" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="How can we help you today?" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer Complete -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>fastsong Downloader</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                        The ultimate Neumorphic media extraction platform designed for speed, security, and elegance.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home Dashboard</a></li>
+                        <li><a href="#tutorials">Tutorial Articles</a></li>
+                        <li><a href="#contact">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Supported Media</h4>
+                    <ul>
+                        <li><a href="#">TikTok Extractor</a></li>
+                        <li><a href="#">YouTube MP3/MP4</a></li>
+                        <li><a href="#">Instagram Reels</a></li>
+                        <li><a href="#">Spotify Stream</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 10px;">Get updates on new downloader features.</p>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <input type="email" placeholder="Enter email..." style="padding: 8px 12px; font-size: 0.8rem;">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 fastsong Media Systems. All rights reserved. Built with Neumorphic UI Design.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Handle Chip Selections
+        function setupChips(containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    container.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+                    chip.classList.add('selected');
+                });
+            });
+        }
+
+        setupChips('formatChips');
+        setupChips('qualityChips');
+
+        // Category Quick Search / Slider Action
+        function setQuickSearch(categoryName) {
+            document.querySelectorAll('.cat-item').forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('mediaUrl').value = `https://fastsong-stream.io/trending/${categoryName.toLowerCase().replace(/\s+/g, '-')}`;
+        }
+
+        // Process & Simulate Result Display
+        document.getElementById('processBtn').addEventListener('click', () => {
+            const urlInput = document.getElementById('mediaUrl').value.trim();
+            const resultCard = document.getElementById('resultCard');
+            
+            if(!urlInput) {
+                alert('Silakan masukkan tautan atau URL media terlebih dahulu!');
+                return;
+            }
+
+            document.getElementById('resultTitle').innerText = "Media Berhasil Diproses: " + urlInput.substring(0, 30) + "...";
+            resultCard.style.display = 'block';
+            resultCard.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.getElementById('btnDownloadInstant').addEventListener('click', () => {
+            alert('Mengunduh file secara instan...');
+        });
+
+        document.getElementById('btnPreview').addEventListener('click', () => {
+            alert('Membuka pemutar media instan (One-Click Preview)...');
+        });
+    </script>
+</body>
+</html>
