@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor Us & Media Kit — Support</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-neu: #e6ebf4;
+            --shadow-light: #ffffff;
+            --shadow-dark: #c4ccda;
+            --text-primary: #2d3748;
+            --text-secondary: #64748b;
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --radius: 20px;
+            
+            /* Neumorphism Shadows */
+            --neu-flat: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+            --neu-pressed: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+            --neu-sm: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-neu);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Navbar */
+        header {
+            padding: 28px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .back-home {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 12px;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-sm);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-home:hover {
+            color: var(--accent-color);
+        }
+
+        .back-home:active {
+            box-shadow: var(--neu-pressed);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto 75px auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-pressed);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            line-height: 1.25;
+            color: var(--text-primary);
+        }
+
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 36px;
+        }
+
+        /* Neumorphic Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            background: var(--bg-neu);
+            color: var(--text-primary);
+            box-shadow: var(--neu-sm);
+        }
+
+        .btn:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            box-shadow: var(--neu-pressed);
+            transform: translateY(0);
+        }
+
+        .btn-accent {
+            background: var(--accent-color);
+            color: #ffffff;
+            box-shadow: 6px 6px 14px rgba(79, 70, 229, 0.35), -6px -6px 14px var(--shadow-light);
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-hover);
+            color: #ffffff;
+        }
+
+        .btn-accent:active {
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Stats Grid */
+        .stats-section {
+            margin-bottom: 85px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 45px;
+            color: var(--text-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-flat);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 18px auto;
+            border-radius: 16px;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-pressed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--accent-color);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .stat-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Sponsorship Tiers */
+        .tiers-section {
+            margin-bottom: 85px;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 32px;
+        }
+
+        .tier-card {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-flat);
+            border-radius: var(--radius);
+            padding: 38px 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .tier-card.featured {
+            border: 2px solid rgba(79, 70, 229, 0.25);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -14px;
+            right: 28px;
+            background: var(--accent-color);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 50px;
+            box-shadow: 4px 4px 10px rgba(79, 70, 229, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .tier-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .tier-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--accent-color);
+        }
+
+        .tier-price span {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .tier-desc {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+            padding: 16px;
+            border-radius: 14px;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-pressed);
+        }
+
+        .tier-features {
+            list-style: none;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .tier-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .tier-features li i {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-neu);
+            box-shadow: var(--neu-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        .tier-card .btn {
+            width: 100%;
+        }
+
+        /* Call to Action / Contact */
+        .cta-box {
+            background: var(--bg-neu);
+            box-shadow: var(--neu-flat);
+            border-radius: var(--radius);
+            padding: 50px 32px;
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .cta-box h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0 auto 30px auto;
+            font-size: 0.98rem;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 18px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .cta-box {
+                padding: 36px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <a href="https://awdev.my.id" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                Sponsor<span> Up</span>
+            </a>
+            <a href="https://m.dana.id/s/catalogue/qn3axzk8" class="back-home">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
+            </a>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="badge">
+                <i class="fa-solid fa-handshake"></i> Kemitraan & Kolaborasi
+            </div>
+            <h1>Dukung Inovasi, Perluas Jangkauan Brand Bersama <span>awdev.my.id</span></h1>
+            <p>Jangkau audiens yang terdiri dari developer, tech enthusiast, dan kreator digital melalui platform dan konten teknologi kami.</p>
+            <a href="#tiers" class="btn btn-accent">
+                Lihat Paket Sponsor <i class="fa-solid fa-arrow-down"></i>
+            </a>
+        </section>
+
+        <!-- Stats / Media Kit Audience -->
+        <section class="stats-section">
+            <h2 class="section-title">Sekilas Statistik Audiens</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3>10K+</h3>
+                    <p>Pengunjung Unik Bulanan</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3>35K+</h3>
+                    <p>Total Tayangan Halaman</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <h3>2.5K+</h3>
+                    <p>Subscriber Newsletter</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>4.8%</h3>
+                    <p>Rata-rata CTR Iklan</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tiers Section -->
+        <section class="tiers-section" id="tiers">
+            <h2 class="section-title">Pilihan Paket Sponsor & Iklan</h2>
+            <div class="tiers-grid">
+                
+                <!-- Tier 1 -->
+                <div class="tier-card">
+                    <div class="tier-name">Supporter / Banner</div>
+                    <div class="tier-price">Rp 150K <span>/bulan</span></div>
+                    <div class="tier-desc">Cocok untuk startup kecil, kreator, atau developer mandiri yang ingin memamerkan produknya.</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Logo di bagian Footer website</li>
+                        <li><i class="fa-solid fa-check"></i> 1x Banner kecil di sidebar artikel</li>
+                        <li><i class="fa-solid fa-check"></i> Laporan performa bulanan</li>
+                    </ul>
+                    <a href="https://m.dana.id/s/catalogue/qn3axzk8 " class="btn">Pilih Paket Ini</a>
+                </div>
+
+                <!-- Tier 2 (Featured) -->
+                <div class="tier-card featured">
+                    <span class="popular-badge">Paling Populer</span>
+                    <div class="tier-name">Featured Partner</div>
+                    <div class="tier-price">Rp 450K <span>/bulan</span></div>
+                    <div class="tier-desc">Solusi terbaik untuk produk SaaS, tools developer, atau layanan digital yang mencari eksposur tinggi.</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Logo utama di beranda & artikel</li>
+                        <li><i class="fa-solid fa-check"></i> 1x Artikel Review / Sponsored Post</li>
+                        <li><i class="fa-solid fa-check"></i> Promosi via Newsletter bulanan</li>
+                        <li><i class="fa-solid fa-check"></i> Prioritas penempatan banner</li>
+                    </ul>
+                    <a href="https://m.dana.id/s/catalogue/qn3axzk8 " class="btn btn-accent">Pilih Paket Ini</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="tier-card">
+                    <div class="tier-name">Custom Partnership</div>
+                    <div class="tier-price">Custom</div>
+                    <div class="tier-desc">Kebutuhan promosi khusus seperti event sponsorship, dedicated campaign, atau kerja sama jangka panjang.</div>
+                    <ul class="tier-features">
+                        <li><i class="fa-solid fa-check"></i> Penyesuaian kampanye sesuai brand</li>
+                        <li><i class="fa-solid fa-check"></i> Integrasi konten mendalam</li>
+                        <li><i class="fa-solid fa-check"></i> Dukungan penuh & konsultasi</li>
+                    </ul>
+                    <a href="mailto:cs@awdev.my.id?subject=Inquiry%20Sponsorship%20-%20Custom" class="btn">Hubungi Kami</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-box">
+            <h2>Siap Berkolaborasi Bersama Kami?</h2>
+            <p>Unduh dokumen lengkap Media Kit dalam format PDF atau langsung kirimkan email untuk mendiskusikan peluang kerja sama.</p>
+            <div class="cta-actions">
+                <a href="mailto:cs@awdev.my.id" class="btn btn-accent">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Email Proposal
+                </a>
+                <a href="https://m.dana.id/s/catalogue/qn3axzk8" class="btn">
+                    <i class="fa-solid fa-download"></i> Unduh Media Kit (PDF)
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 Endrosment. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
